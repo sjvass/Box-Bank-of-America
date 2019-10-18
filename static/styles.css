@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border-top: 1px solid #ccc;
+    background-image: linear-gradient(#f1f1f1, #d8d7d7)
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    border-right: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-image: linear-gradient(#ddd, #d6d5d5);
+}
+
+/* active tab */
+.tab button.active {
+   background-image: linear-gradient(#fffdfd, #f1f1f1)
+}
+
+/*tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+/*  border: 1px solid #ccc;
+  border-top: none;*/
+}
+
+.tablinks {
+  color: #2a6eb2;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+/*file styling*/
+form {
+  width: 80%;
+  margin-top: 20px;
+/*  padding: 20px;*/
+/*  border: 1px solid black;*/
+}
+
+form ol {
+  padding-left: 0;
+}
+
+form li{
+  justify-content: space-between;
+  margin-top: 10px;
+  list-style-type: none;
+/*  border: 1px solid black;*/
+}
+
+form img{
+  max-width: 100%;
+  order: 1;
+}
+
+iframe {
+    width: 100%;
+    height: 500px;
+}
+
+form p {
+  line-height: 32px;
+}
+
+form label, form button {
+  background-color: #e53345;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  height: auto;
+  margin-top: 10px;
+}
+
+form label:hover, form button:hover {
+  background-color: #d22d3e;
+  color: white;
+}
+
+form label:active, form button:active {
+  background-color: #d22d3e;
+  color: white;
+}

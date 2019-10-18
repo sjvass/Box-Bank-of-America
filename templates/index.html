@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank of America</title>
+     <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+
+    <div id='header'>
+        <img src="/static/logo-bank-of-america.png"/ width="300px">
+    </div>
+
+   <!-- Tab links -->
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'Upload')">Submit Application</button>
+      <button class="tablinks" onclick="openTab(event, 'View')">View Application</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="Upload" class="tabcontent">
+        <h3>Submit an Application</h3>
+        <p>Upload a pdf of your application to apply for a loan.</p>
+        <form method="post" enctype="multipart/form-data">
+            <div>
+                <label for="image_uploads">Choose File</label>
+                <input type="file" id="image_uploads" name="image_uploads" accept="image" multiple>
+            </div>
+            <div class="preview">
+                <p>No files currently selected for upload.</p>
+            </div>
+            <div>
+                <button>Submit Application</button>
+            </div>
+            </form>
+    </div>
+
+    <div id="View" class="tabcontent">
+      <h3>View Your Application</h3>
+      <p>View your loan application.</p>
+    </div>
+
+    <script type="text/javascript" src="/static/scripts.js"></script>
+
+</body>
+</html>
