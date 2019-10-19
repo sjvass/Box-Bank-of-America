@@ -27,6 +27,8 @@ var preview = document.querySelector('.preview');
 
 input.style.opacity = 0;
 
+let curFiles = null;
+
 //file input event listener
 input.addEventListener('change', updateImageDisplay);
 
@@ -36,7 +38,7 @@ function updateImageDisplay() {
     preview.removeChild(preview.firstChild);
   }
 
-  var curFiles = input.files;
+  curFiles = input.files;
   if(curFiles.length === 0) {
     var para = document.createElement('p');
     para.textContent = 'No files currently selected for upload';
@@ -62,9 +64,13 @@ function updateImageDisplay() {
       listItem.appendChild(para);
 
       list.appendChild(listItem);
+
     }
+
   }
 }
+
+console.log(curFiles);
 
 
 //get file size

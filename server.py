@@ -21,8 +21,17 @@ def home():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    folder_id = '22222'
-    uploaded_file = client.folder(folder_id).upload('/path/to/file.pdf')
+
+    file = request.files['image_uploads']
+
+    print(file)
+    
+    return 'yay'
+
+
+    # folder_id = '22222'
+    # uploaded_file = client.folder(folder_id).upload('/path/to/file.pdf')
+
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be5000 True at the
