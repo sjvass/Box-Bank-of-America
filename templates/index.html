@@ -12,12 +12,12 @@
 
    <!-- Tab links -->
     <div class="tab">
-      <button class="tablinks" onclick="openTab(event, 'Upload')">Submit Application</button>
+      <button class="tablinks active" onclick="openTab(event, 'Upload')">Submit Application</button>
       <button class="tablinks" onclick="openTab(event, 'View')">View Application</button>
     </div>
 
     <!-- Tab content -->
-    <div id="Upload" class="tabcontent">
+    <div id="Upload" class="tabcontent" style="display: block;">
         <h3>Submit an Application</h3>
         <p>Upload a pdf of your application to apply for a loan.</p>
         <form method="post" enctype="multipart/form-data" action="/upload">
