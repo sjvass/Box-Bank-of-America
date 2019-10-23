@@ -58,20 +58,28 @@ def upload():
     print(client.folder(folder_id))
     uploaded_file = client.folder(folder_id).upload(destination)
 
+    print('ID: {file_id}'.format(file_id=uploaded_file.id))
+
+    session['upload_id'] = uploaded_file.id
+
     os.remove(destination)
     
     return redirect('/')
 
 
+@app.route('/download', methods=['GET', 'POST'])
+def download():
 
-# def upload_file(client):
-#     root_folder = client.folder(folder_id='0')
-#     file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'file.txt')
-#     a_file = root_folder.upload(file_path, file_name='i-am-a-file.txt')
-#     try:
-#         print('{0} uploaded: '.format(a_file.get()['name']))
-#     finally:
-#         print('Delete i-am-a-file.txt succeeded: {0}'.format(a_file.delete()))
+    #Check that file id is in session
+    if 'upload_id' in session.keys():
+        client = make_client()
+        file_id = session['upload_id']
+        box_file = client.file(file_id=file_id).get()
+        output_file = open('static/{file_id}.pdf'.format(file_id=file_id), 'wb')
+        box_file.download_to(output_file)
+        return jsonify({'success': file_id})
+    else:
+        return jsonify({'success': 0})
 
 
 def make_client():

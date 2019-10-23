@@ -3,6 +3,10 @@ function openTab(evt, action) {
   // Declare all variables
   var i, tabcontent, tablinks;
 
+  if(action === 'View') {
+    downloadFile()
+  }
+
   // Get all elements with class="tabcontent" and hide them
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
@@ -82,5 +86,30 @@ function returnFileSize(number) {
   } else if(number >= 1048576) {
     return (number/1048576).toFixed(1) + 'MB';
   }
+}
+
+
+
+function downloadFile(){
+  fetch('/download')
+  .then(response => response.json())
+  .then(data => {
+
+    alert(data.success);
+
+    view = document.getElementById('View');
+    if(data.success === 0) {
+
+      let para = document.createElement('p');
+      para.textContent = 'You have not uploaded an application'
+      view.appendChild(para);
+
+    } else {
+
+      let fileViewer = document.createElement('iframe');
+      fileViewer.src = `static/${data.success}.pdf`;
+      view.appendChild(fileViewer);
+    }
+  });
 }
 
