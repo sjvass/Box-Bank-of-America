@@ -19,13 +19,17 @@ app.secret_key = "ABC"
 # error.
 app.jinja_env.undefined = StrictUndefined
 
+#main home route. Returns the index.html template
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
 
+
+#upload route for handling uploads
 @app.route('/upload', methods=['POST'])
 def upload():
 
+    #get image file from client
     file = request.files['image_uploads']
 
     file_read = file.stream.read()
@@ -45,28 +49,33 @@ def upload():
     #close file
     my_file.close()
 
-    # path = os.path.realpath(file.name)
-
     # print(path)
-    print(file.filename)
+    # print(file.filename)
 
+    #set up box client
     client = make_client()
 
-    print(client)
+    # print(client)
 
+    #store files in root folder of box account
     folder_id = '0'
-    print(client.folder(folder_id))
+    # print(client.folder(folder_id))
+    #upload to box account using box SDK
     uploaded_file = client.folder(folder_id).upload(destination)
 
-    print('ID: {file_id}'.format(file_id=uploaded_file.id))
+    # print('ID: {file_id}'.format(file_id=uploaded_file.id))
 
+    #save file ID to session so it can be accessed later
     session['upload_id'] = uploaded_file.id
 
+    #remove the file from the client
     os.remove(destination)
     
     return redirect('/')
 
 
+#route handles dowloading file to preview submitted files
+#Returns the file ID/name of the file on success or 0 on failure
 @app.route('/download', methods=['GET', 'POST'])
 def download():
 
@@ -74,14 +83,18 @@ def download():
     if 'upload_id' in session.keys():
         client = make_client()
         file_id = session['upload_id']
+        #get file from Box account using sdk
         box_file = client.file(file_id=file_id).get()
+        #creates pdf file with name of file ID to store dowloaded file
         output_file = open('static/{file_id}.pdf'.format(file_id=file_id), 'wb')
         box_file.download_to(output_file)
         return jsonify({'success': file_id})
     else:
+        #If there is no file ID, the call was unsucessful. Returns a 0
         return jsonify({'success': 0})
 
 
+#sets up and returns Box client
 def make_client():
 
     auth = OAuth2(

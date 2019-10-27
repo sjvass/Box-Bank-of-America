@@ -3,6 +3,7 @@ function openTab(evt, action) {
   // Declare all variables
   var i, tabcontent, tablinks;
 
+  //If view tab, dowload file
   if(action === 'View') {
     downloadFile()
   }
@@ -29,6 +30,7 @@ function openTab(evt, action) {
 var input = document.querySelector('input');
 var preview = document.querySelector('.preview');
 
+//hide defult file selector input (because it can't be styled)
 input.style.opacity = 0;
 
 let curFiles = null;
@@ -38,18 +40,23 @@ input.addEventListener('change', updateImageDisplay);
 
 //update image display
 function updateImageDisplay() {
+  //Empty pervious content of the view
   while(preview.firstChild) {
     preview.removeChild(preview.firstChild);
   }
 
+  //get all files selected
   curFiles = input.files;
+  //If no files selected, add p element telling use no files selected
   if(curFiles.length === 0) {
     var para = document.createElement('p');
     para.textContent = 'No files currently selected for upload';
     preview.appendChild(para);
   } else {
+    //If file is selected
     var list = document.createElement('ol');
     preview.appendChild(list);
+    //for each file, add contents and size to view
     for(var i = 0; i < curFiles.length; i++) {
       var listItem = document.createElement('li');
       var para = document.createElement('p');
@@ -57,11 +64,11 @@ function updateImageDisplay() {
 
       //check if file is pdf
       var image;
-      if(curFiles[i].type === 'application/pdf') {
+      // if(curFiles[i].type === 'application/pdf') {
         image = document.createElement('iframe');
-      } else {
-        image = document.createElement('img');
-      }
+      // } else {
+      //   image = document.createElement('img');
+      // }
       image.src = window.URL.createObjectURL(curFiles[i]);
 
       listItem.appendChild(image);
@@ -74,7 +81,7 @@ function updateImageDisplay() {
   }
 }
 
-console.log(curFiles);
+// console.log(curFiles);
 
 
 //get file size
@@ -89,15 +96,17 @@ function returnFileSize(number) {
 }
 
 
-
+//Dowloads and displays file downloaded from Box
 function downloadFile(){
+  //Get call to Dowload route to dowload the file
   fetch('/download')
   .then(response => response.json())
   .then(data => {
 
-    alert(data.success);
+    // alert(data.success);
 
     view = document.getElementById('View');
+    //If no file has been uploaded, tells user that
     if(data.success === 0) {
 
       let para = document.createElement('p');
@@ -105,7 +114,7 @@ function downloadFile(){
       view.appendChild(para);
 
     } else {
-
+      //If file has been uploaded, displays file
       let fileViewer = document.createElement('iframe');
       fileViewer.src = `static/${data.success}.pdf`;
       view.appendChild(fileViewer);

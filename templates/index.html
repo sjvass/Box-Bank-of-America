@@ -6,35 +6,45 @@
 </head>
 <body>
 
+    <!-- Bank of America Logo image -->
     <div id='header'>
         <img src="/static/logo-bank-of-america.png"/ width="300px">
     </div>
 
    <!-- Tab links -->
     <div class="tab">
+      <!-- Load page with upload tab active -->
       <button class="tablinks active" onclick="openTab(event, 'Upload')">Submit Application</button>
       <button class="tablinks" onclick="openTab(event, 'View')">View Application</button>
     </div>
 
-    <!-- Tab content -->
+    <!-- Upload tab content
+         Start displaying content of this tab 
+    -->
     <div id="Upload" class="tabcontent" style="display: block;">
         <h3>Submit an Application</h3>
         <p>Upload a pdf of your application to apply for a loan.</p>
+        <!-- Upload form -->
         <form method="post" enctype="multipart/form-data" action="/upload">
+            <!-- Upload input -->
             <div>
                 <label for="image_uploads">Choose File</label>
-                <input type="file" id="image_uploads" name="image_uploads" accept="application/pdf" multiple>
+                <input type="file" id="image_uploads" name="image_uploads" accept="application/pdf">
             </div>
+
+            <!-- File preview -->
             <div class="preview">
                 <p>No files currently selected for upload.</p>
             </div>
+
+            <!--Submit -->
             <div>
-                <!-- <input type="submit" name="submit">Submit Application</input> -->
                 <button>Submit Application</button>
             </div>
             </form>
     </div>
 
+    <!-- View tab content -->
     <div id="View" class="tabcontent">
       <h3>View Your Application</h3>
       <p>View your loan application.</p>
